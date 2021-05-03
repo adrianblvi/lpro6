@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card" style="width: 15rem;">
+                <img class="card-img-top" src="/images/bombero.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Intervenciones</h5>
+                    <a href="/int/list" class="btn btn-primary btn-block">Ver listado</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 15rem;">
+                <img class="card-img-top" src="/images/simulacrum.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Simulacros</h5>
+                    <a href="/sim/list" class="btn btn-primary btn-block">Ver listado</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 15rem;">
+                <img class="card-img-top" src="/images/entreno.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Entrenamientos</h5>
+                    <a href="/train/list" class="btn btn-primary btn-block">Ver listado</a>
+                </div>
+            </div>
+        </div>
+        {{#if user.is_superUser}}
+        <div class="col-sm">
+            <div class="card" style="width: 15rem;">
+                <img class="card-img-top" src="/images/users.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Bomberos</h5>
+                    <a href="/admin/users" class="btn btn-primary btn-block">Ver listado</a>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

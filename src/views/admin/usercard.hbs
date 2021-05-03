@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="/images/avatar.png" alt="Admin" class="rounded-circle" width="130">
+                        <div class="mt-3">
+                            <h4>{{user.name}}</h4>
+                            <p class="text-secondary mb-1"> {{user.puesto}} Lpro06</p>
+                            <p class="text-muted font-size-sm">{{user.address}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Nombre</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{user.name}} {{user.lastname}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{user.email}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Telefono</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            (+34) {{user.phone}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Dni</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{user.dni}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Dirección</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{user.address}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grey-bg container-fluid">
+        <section id="minimal-statistics">
+            <div class="row gutters-sm p-3">
+                <div class="col-xl-4  col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <a href="/users/profile/train">
+                                            <i class="fas fa-dumbbell primary font-large-2 float-left"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3 class="primary">278</h3>
+                                        <span>Entrenamientos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4  col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <a href="/users/profile/sim">
+                                            <i class="fas fa-fire-extinguisher warning font-large-2 float-left"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3 class="warning">156</h3>
+                                        <span>Simulacros</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4  col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <a href="/users/profile/int">
+                                            <i class=" fas fa-truck success font-large-2 float-left"></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3 class="success">156</h3>
+                                        <span>Intervenciones</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

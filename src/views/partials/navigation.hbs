@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        {{#if user}}
+        <a href="/home" class="navbar-brand"><i class="fas fa-fire-extinguisher"></i>Fire<b>Health</b></a>
+        {{else}}
+        <a href="/" class="navbar-brand"><i class="fas fa-fire-extinguisher"></i>Fire<b>Health</b></a>
+        {{/if}}
+        <!--<a href="#" class="navbar-brand"><i class="fas fa-fire"></i>Fire<b>Health</b></a>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/int/list">Intervenciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/sim/list">Simulacros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/train/list">Entrenamientos</a>
+                </li>
+                {{#if user.is_superUser}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/users">Bomberos</a>
+                </li>
+                {{/if}}
+                {{else}}
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                {{/if}}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#if user}}
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
+                            src="/images/user.png" class="avatar" alt="Avatar"> {{user.name}}<b class="caret"></b></a>
+                    <div class="dropdown-menu">
+                        <a href="/users/profile" class="dropdown-item"><i class="far fa-user"></i> Perfil</a></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/users/logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
+                            Salir</a></a>
+                    </div>
+                </li>
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Iniciar Sesión</a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
