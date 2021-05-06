@@ -13,7 +13,7 @@ adminCtrls.newUser = async (req, res) => {
 };
 
 adminCtrls.AddNewUser = async (req, res) => {
-    const { name, surname_one, surname_two, address, dni, phone, puesto } = req.body;
+    const { name, surname_one, surname_two, address, dni, phone, puesto, gender } = req.body;
     const lastname = surname_one + ' ' + surname_two;
     const password = dni.substring(0, 9);
     const newuser = new User({
@@ -23,10 +23,14 @@ adminCtrls.AddNewUser = async (req, res) => {
         dni,
         password,
         phone,
+        gender,
         puesto
     });
     if (puesto == "Bombero jefe") {
         newuser.is_admin = true;
+    }
+    if (gender == 'male') {
+        newuser.gender = true;
     }
     newuser.password = await newuser.encryptPassword(password);
     newuser.email = await name.toLowerCase().trim() + '.' + surname_one.toLowerCase().trim() + '@bomberos.es';

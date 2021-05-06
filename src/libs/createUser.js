@@ -10,6 +10,9 @@ const createAdminUser = async () => {
         lastname: 'Blanco Vieira',
         email: 'admin@admin',
         dni: '45142073L',
+        phone: '664572535',
+        address: 'Campus de Vigo As Lagoas, Rúa Maxwell, s/n',
+        gender: true,
         is_superUser: true,
     });
 

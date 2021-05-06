@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     phone: { type: String },
     address: { type: String },
     puesto: { type: String },
+    gender: { type: Boolean, default: false },
     is_superUser: { type: Boolean, default: false },
     date: { type: Date, default: Date.now }
 });

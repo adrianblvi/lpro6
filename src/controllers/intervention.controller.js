@@ -4,6 +4,7 @@ const Chart = require('chart.js');
 const Intervention = require('../models/Internvention');
 
 interventionCtrls.renderIntList = async (req, res) => {
+    console.log(req.user.id);
     const interventions = await Intervention.find();
     res.render('intervention/list', { interventions });
 }
