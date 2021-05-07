@@ -3,14 +3,20 @@ const { Schema, model } = require('mongoose');
 
 const InterventionSchema = new Schema({
 
-    status:
+    id_bombero:
     {
-        type: String
+        type: String,
+        required: false
     },
-    date:
+    startdate:
+    {
+        type: Date, default: Date.now
+    },
+    enddate:
     {
         type: Date, default: Date.now
     }
+
 });
 
 module.exports = model('Intervention', InterventionSchema);

@@ -17,7 +17,7 @@ const { createIntervention } = require("./libs/createIntervention");
 const app = express();
 require('./config/passport');
 createAdminUser();
-//createIntervention();
+
 
 
 // Settings

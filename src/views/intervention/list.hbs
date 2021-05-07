@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="col-sm">
-                            <a href="#" class="btn btn-primary waves-effect waves-light"><i
+                            <a href="/int/new/{{id_int}}" class="btn btn-primary waves-effect waves-light"><i
                                     class="mdi mdi-plus ml-auto"></i> Nueva Intervención</a>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     {{#each interventions}}
                     <tr>
                         <td>{{@index}}</td>
-                        <td>{{date}}</td>
+                        <td>{{startdate}}</td>
                         <td>
                             <a href="/int/list/{{_id}}" class="view" title="View" data-toggle="tooltip"><i
                                     class="material-icons">&#xE417;</i></a>
@@ -44,7 +44,7 @@
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <div class="hint-text">Showing <b>{{showing}}</b> out of <b>{{num}}</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item "><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
                     <li class="page-item"><a href="#" class="page-link">1</a></li>
