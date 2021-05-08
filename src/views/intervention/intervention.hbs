@@ -16,8 +16,9 @@
                         </div>
                     </div>
                     <div class="col-md-4 p-2">
-                        <a href="/int/new/{{id_int}}" class="btn btn-primary waves-effect waves-light"><i
+                        <a href="/int/end" id="btnFin" class="btn btn-primary waves-effect waves-light"><i
                                 class="mdi mdi-plus ml-auto"></i> Finalizar Intervención</a>
+                        <!-- <button id="btnFin">Finalizar Intervención</button>-->
                     </div>
                 </div>
                 <div class="row p-4">
@@ -47,7 +48,7 @@
                                             <i class="fas fa-heartbeat warning font-large-2 float-left"></i>
                                         </div>
                                         <div class="media-body text-right">
-                                            <h3 class="warning">74 ppm</h3>
+                                            <h3 id="pulso" class="warning"></h3>
                                             <span>Ritmo Cardíaco</span>
                                         </div>
                                     </div>
@@ -64,7 +65,7 @@
                                             <i class="fas fa-thermometer success font-large-2 float-left"></i>
                                         </div>
                                         <div class="media-body text-right">
-                                            <h3 class="success">36,5º</h3>
+                                            <h3 id="tempInt" class="success"></h3>
                                             <span>Temperatura Int </span>
                                         </div>
                                     </div>
@@ -81,7 +82,7 @@
                                             <i class="fas fa-thermometer danger font-large-2 float-left"></i>
                                         </div>
                                         <div class="media-body text-right">
-                                            <h3 class="danger">35º</h3>
+                                            <h3 id="tempExt" class="danger"></h3>
                                             <span>Temperatura Ext </span>
                                         </div>
                                     </div>
@@ -94,3 +95,17 @@
         </div>
     </div>
 </div>
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script>
+    const socket = io();
+
+    let tempExt = document.getElementById('tempExt');
+    let tempInt = document.getElementById('tempInt');
+    let btnFin = document.getElementById('btnFin');
+
+
+
+    btnFin.addEventListener('click', () => {
+        socket.emit('fin', 'fin');
+    });
+</script>

@@ -1,7 +1,7 @@
 const interventionCtrls = {}
 const Chart = require('chart.js');
-
 const Intervention = require('../models/Intervention');
+
 
 interventionCtrls.renderIntList = async (req, res) => {
     const interventions = await Intervention.find({ 'id_bombero': req.user.id });
@@ -23,6 +23,7 @@ interventionCtrls.renderIntStats = async (req, res) => {
 
 
 interventionCtrls.newIntervention = async (req, res) => {
+
     const newIntervention = new Intervention({
         id_bombero: req.user.id
     });

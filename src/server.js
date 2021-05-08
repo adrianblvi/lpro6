@@ -75,11 +75,6 @@ app.use(require("./routes/simulacrum.routes"));
 app.use(require("./routes/training.routes"));
 app.use(require("./routes/users.routes"));
 app.use(require("./routes/admin.routes"));
-/*app.use(require("./routes/users.routes"));
-app.use(require("./routes/admin.routes"));
-app.use(require("./routes/ticket.routes"));
-app.use(require("./routes/profile.routes"));
-*/
 
 // Static Files
 
