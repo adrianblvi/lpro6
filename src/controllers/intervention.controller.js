@@ -33,8 +33,9 @@ interventionCtrls.newIntervention = async (req, res) => {
 }
 
 interventionCtrls.finishIntervention = async (req, res) => {
-    const { id_int } = req.params.id_int;
-    console.log(id_int);
+    //const { id_int } = req.body;
+    //console.log(id_int);
+    console.log(req.body);
     res.send('ok');
 }
 

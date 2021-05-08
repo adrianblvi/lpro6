@@ -131,16 +131,16 @@
             </div>
             <div class="col-xl-6">
                 <p>Evolución Temperaturas</p>
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <canvas id="tempChart" width="400" height="400"></canvas>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                 <script type="text/javascript">
-                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var ctx = document.getElementById('tempChart').getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
                             labels: [],
                             datasets: [{
-                                label: 'Ritmo cardiaco',
+                                label: 'Temp. Corporal',
                                 data: [12, 19, 3, 5, 2, 3],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
@@ -176,10 +176,10 @@
         <div class="row p-4">
             <div class="col-xl-6">
                 <p>Frecuencia Cardíaca frente a las Temperaturas</p>
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <canvas id="pulsoTemp" width="400" height="400"></canvas>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                 <script type="text/javascript">
-                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var ctx = document.getElementById('pulsoTemp').getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
@@ -218,6 +218,7 @@
                 </script>
             </div>
             <div class="col-xl-6">
+                <!--Añadir if para comporbar si hay caidas-->
                 <p>Relación de caidas con pulso y temperatura</p>
             </div>
         </div>
