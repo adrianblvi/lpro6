@@ -20,6 +20,9 @@
                                 class="mdi mdi-plus ml-auto"></i> Finalizar Intervención</a>
                         <!-- <button id="btnFin">Finalizar Intervención</button>-->
                     </div>
+                    <div class="col-md-4 p-2">
+                        <button id="btnIni">Recoger Datos</button>
+                    </div>
                 </div>
                 <div class="row p-4">
                     <div class="col-xl-3 col-sm-6 col-12">
@@ -102,14 +105,23 @@
     let tempExt = document.getElementById('tempExt');
     let tempInt = document.getElementById('tempInt');
     let btnFin = document.getElementById('btnFin');
+    let btnIni = document.getElementById('btnIni');
+
+
+    socket.emit('inicio:user', 'fin');
 
     btnFin.addEventListener('click', () => {
-        socket.emit('fin', 'fin');
+        socket.emit('fin:user', 'fin');
     });
 
-    socket.on('data:newdata', () => {
-        console.log('data:newdata received');
-        tempExt.innerHTML = 35;
-        tempInt.innerHTML = 35;
+
+    btnIni.addEventListener('click', () => {
+        socket.emit('inicio:user', 'fin');
     });
+
+
+    socket.on('prueba', () => {
+        console.log('a ver');
+    });
+
 </script>

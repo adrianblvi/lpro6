@@ -23,19 +23,27 @@ interventionCtrls.renderIntStats = async (req, res) => {
 
 
 interventionCtrls.newIntervention = async (req, res) => {
+    const date = new Date();
+    const date_tosaved = date.getUTCDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getFullYear();
+    const date_tosaveh = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    const date_def = date_tosaved + ' ' + date_tosaveh;
     const newIntervention = new Intervention({
-        id_bombero: req.user.id
+        id_bombero: req.user.id,
+        startdate: date_def
     });
     const int = await newIntervention.save();
-    const id_int = int.id;
-        res.render('intervention/intervention', { id_int });
+    res.render('intervention/intervention');
 }
 
 interventionCtrls.finishIntervention = async (req, res) => {
-    //const { id_int } = req.body;
-    //console.log(id_int);
-    console.log(req.body);
-    res.send('ok');
+    const interventions = await Intervention.find({ id_bombero: req.user.id });
+    const id_toupdate = interventions[interventions.length - 1].id;
+    const date = new Date();
+    const date_tosaved = date.getUTCDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getFullYear();
+    const date_tosaveh = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    const date_def = date_tosaved + ' ' + date_tosaveh;
+    const int_toup = await Intervention.findByIdAndUpdate(id_toupdate, { 'enddate': date_def });
+    res.redirect('list');
 }
 
 

@@ -10,11 +10,13 @@ const InterventionSchema = new Schema({
     },
     startdate:
     {
-        type: Date, default: Date.now
+        type: String,
+        required: false
     },
     enddate:
     {
-        type: Date, default: Date.now
+        type: String,
+        required: false
     }
 
 });

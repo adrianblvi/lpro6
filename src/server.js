@@ -39,6 +39,7 @@ app.set("view engine", ".hbs");
 // Middlewares
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'sockets')));
 app.use(methodOverride('_method'));
 app.use(session({
     secret: 'mysecretapp',
@@ -48,6 +49,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public/images/', 'favicon.ico')));
 
 // Global Variables
@@ -78,7 +80,6 @@ app.use(require("./routes/admin.routes"));
 
 // Static Files
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 module.exports = app;
