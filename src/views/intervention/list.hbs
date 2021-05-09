@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="col-sm">
-                            <a href="/int/new/{{id_int}}" class="btn btn-primary waves-effect waves-light"><i
+                            <a href="/int/new" id="btnIni" class="btn btn-primary waves-effect waves-light"><i
                                     class="mdi mdi-plus ml-auto"></i> Nueva Intervención</a>
                         </div>
                     </div>
@@ -60,3 +60,12 @@
     </div>
 </div>
 </div>
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script>
+    const socket = io();
+    let btnFin = document.getElementById('btnIni');
+
+    btnFin.addEventListener('click', () => {
+        socket.emit('inicio:user','Crear nueva Int');
+    });
+</script>

@@ -103,9 +103,13 @@
     let tempInt = document.getElementById('tempInt');
     let btnFin = document.getElementById('btnFin');
 
-
-
     btnFin.addEventListener('click', () => {
         socket.emit('fin', 'fin');
+    });
+
+    socket.on('data:newdata', () => {
+        console.log('data:newdata received');
+        tempExt.innerHTML = 35;
+        tempInt.innerHTML = 35;
     });
 </script>

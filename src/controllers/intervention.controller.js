@@ -23,14 +23,12 @@ interventionCtrls.renderIntStats = async (req, res) => {
 
 
 interventionCtrls.newIntervention = async (req, res) => {
-
     const newIntervention = new Intervention({
         id_bombero: req.user.id
     });
     const int = await newIntervention.save();
     const id_int = int.id;
-
-    res.render('intervention/intervention', { id_int });
+        res.render('intervention/intervention', { id_int });
 }
 
 interventionCtrls.finishIntervention = async (req, res) => {
