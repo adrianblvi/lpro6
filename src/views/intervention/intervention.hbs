@@ -20,9 +20,6 @@
                                 class="mdi mdi-plus ml-auto"></i> Finalizar Intervención</a>
                         <!-- <button id="btnFin">Finalizar Intervención</button>-->
                     </div>
-                    <div class="col-md-4 p-2">
-                        <button id="btnIni">Recoger Datos</button>
-                    </div>
                 </div>
                 <div class="row p-4">
                     <div class="col-xl-3 col-sm-6 col-12">
@@ -101,12 +98,11 @@
 <script src="/socket.io/socket.io.js" charset="utf-8"></script>
 <script>
     const socket = io();
-
     let tempExt = document.getElementById('tempExt');
     let tempInt = document.getElementById('tempInt');
+    let pulso = document.getElementById('pulso');
     let btnFin = document.getElementById('btnFin');
-    let btnIni = document.getElementById('btnIni');
-
+    let caida = document.getElementById('caida');
 
     socket.emit('inicio:user', 'fin');
 
@@ -114,14 +110,14 @@
         socket.emit('fin:user', 'fin');
     });
 
-
-    btnIni.addEventListener('click', () => {
-        socket.emit('inicio:user', 'fin');
-    });
-
-
-    socket.on('prueba', () => {
-        console.log('a ver');
+    socket.on('prueba', (datos) => {
+        tempExt.innerHTML = datos.tempext;
+        tempInt.innerHTML = datos.tempint;
+        pulso.innerHTML = datos.pulso;
+        /*if (datos.caida == 1) {
+            console.log('Caida!!!')
+            alert('BOMBERO CAIDO!');
+        }*/
     });
 
 </script>
