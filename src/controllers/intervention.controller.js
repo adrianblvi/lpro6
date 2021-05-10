@@ -13,12 +13,13 @@ interventionCtrls.renderIntList = async (req, res) => {
 interventionCtrls.renderIntStats = async (req, res) => {
     const Stats = await Intervention.findById(req.params.id);
     const date = Stats.startdate.toString().trim();
-    const fecha = date.substring(0, 15).trim();
-    const day = fecha.substring(0, 3);
-    const month = fecha.substring(4, 7);
-    const monthday = fecha.substring(8, 11);
-    const year = fecha.substring(11, 15);
-    res.render('intervention/stats', { Stats, day, month, monthday, year });
+    const dateEnd = Stats.enddate.toString();
+    const fecha = date.split(' ')[0];
+    const horaIni = date.split(' ')[1];
+    const horaFin = dateEnd.split(' ')[1];
+    console.log(horaIni);
+    console.log(horaFin);
+    res.render('intervention/stats', { Stats, fecha });
 }
 
 

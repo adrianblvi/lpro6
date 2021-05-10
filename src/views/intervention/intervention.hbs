@@ -104,7 +104,7 @@
     let btnFin = document.getElementById('btnFin');
     let caida = document.getElementById('caida');
 
-    socket.emit('inicio:user', 'fin');
+    socket.emit('inicio:user', 'inicio');
 
     btnFin.addEventListener('click', () => {
         socket.emit('fin:user', 'fin');
@@ -112,8 +112,12 @@
 
     socket.on('prueba', (datos) => {
         tempExt.innerHTML = datos.tempext;
+        console.log(datos.tempext);
         tempInt.innerHTML = datos.tempint;
+        console.log(datos.tempInt);
         pulso.innerHTML = datos.pulso;
+        console.log(datos.caida);
+        console.log(datos.pulso);
         /*if (datos.caida == 1) {
             console.log('Caida!!!')
             alert('BOMBERO CAIDO!');
