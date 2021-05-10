@@ -17,9 +17,8 @@ interventionCtrls.renderIntStats = async (req, res) => {
     const fecha = date.split(' ')[0];
     const horaIni = date.split(' ')[1];
     const horaFin = dateEnd.split(' ')[1];
-    console.log(horaIni);
-    console.log(horaFin);
-    res.render('intervention/stats', { Stats, fecha });
+    const duracion = obtainDuration(horaIni, horaFin);
+    res.render('intervention/stats', { Stats, fecha, duracion });
 }
 
 
@@ -48,4 +47,29 @@ interventionCtrls.finishIntervention = async (req, res) => {
 }
 
 
+function secondsToString(seconds) {
+    var hour = Math.floor(seconds / 3600);
+    hour = (hour < 10) ? '0' + hour : hour;
+    var minute = Math.floor((seconds / 60) % 60);
+    minute = (minute < 10) ? '0' + minute : minute;
+    var second = seconds % 60;
+    second = (second < 10) ? '0' + second : second;
+    return hour + ':' + minute + ':' + second;
+}
+
+
+function obtainDuration(horaIni, horaFin) {
+    const htos_horaini = horaIni.split(':')[0] * 3600;
+    const htos_horafin = horaFin.split(':')[0] * 3600;
+    const mintos_horaini = horaIni.split(':')[1] * 60;
+    const mintos_horafin = horaFin.split(':')[1] * 60;
+    const seghoraini = horaIni.split(':')[2];
+    const seghorafin = horaFin.split(':')[2];
+    const totalseg_horaini = parseInt(htos_horaini, 10) + parseInt(mintos_horaini, 10) + parseInt(seghoraini, 10);
+    const totalseg_horafin = parseInt(htos_horafin, 10) + parseInt(mintos_horafin, 10) + parseInt(seghorafin, 10);
+    console.log(totalseg_horaini);
+    console.log(totalseg_horafin);
+    const duracion = totalseg_horafin - totalseg_horaini;
+    return secondsToString(duracion);
+}
 module.exports = interventionCtrls;

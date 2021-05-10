@@ -103,6 +103,7 @@
     let pulso = document.getElementById('pulso');
     let btnFin = document.getElementById('btnFin');
     let caida = document.getElementById('caida');
+    let isfall = document.getElementById('isfall');
 
     socket.emit('inicio:user', 'inicio');
 
@@ -114,14 +115,13 @@
         tempExt.innerHTML = datos.tempext;
         console.log(datos.tempext);
         tempInt.innerHTML = datos.tempint;
-        console.log(datos.tempInt);
+        console.log(datos.tempint);
         pulso.innerHTML = datos.pulso;
         console.log(datos.caida);
         console.log(datos.pulso);
-        /*if (datos.caida == 1) {
+        if (datos.caida == 1) {
             console.log('Caida!!!')
-            alert('BOMBERO CAIDO!');
-        }*/
+        }
     });
 
 </script>

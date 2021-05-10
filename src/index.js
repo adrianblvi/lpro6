@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
             tempint_parse = (1 / (0.001129148 + (0.000234125 * tempint_parse) + (0.0000000876741 * tempint_parse * tempint_parse * tempint_parse))) - 273.15
             console.log('TI:', tempint_parse);
             const resistencia_te = config_thermistor_resistor * ((1023.0 / tempext_parse) - 1)
-            tempext_parse = Math.log(resistencia_ti)
+            tempext_parse = Math.log(resistencia_te)
             tempext_parse = (1 / (0.001129148 + (0.000234125 * tempext_parse) + (0.0000000876741 * tempext_parse * tempext_parse * tempext_parse))) - 273.15
             console.log('TE:', tempext_parse);
             //Fin calculo
@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
             } else {
                 console.log('bd es false');
             }
-            socket.broadcast.emit('prueba', { 'tempint': tempint_parse, 'tempext': tempext_parse, 'pulso': pulso_parse, 'caida': caida_parse });
+            socket.broadcast.emit('prueba', { 'tempint': tempint_parse.toFixed(2), 'tempext': tempext_parse.toFixed(2), 'pulso': pulso_parse, 'caida': caida_parse });
         }
         if (bd) {
             console.log('bd es true')
