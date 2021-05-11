@@ -4,12 +4,12 @@ const { Schema, model } = require('mongoose');
 const InterventionDataSchema = new Schema({
     id_bombero:
     {
-        type: ObjectId,
+        type: String,
         required: false
     },
     id_intervention:
     {
-        type: ObjectId,
+        type: String,
         required: false
     },
     pulso:
@@ -35,7 +35,7 @@ const InterventionDataSchema = new Schema({
     },
     date:
     {
-        type: Date, default: Date.now
+        type: String
     }
 
 });

@@ -1,14 +1,23 @@
 const { Schema, model } = require('mongoose');
 
 const SimulacrumSchema = new Schema({
-    status:
+
+    id_bombero:
     {
-        type: String
+        type: String,
+        required: false
     },
-    date:
+    startdate:
     {
-        type: Date, default: Date.now
+        type: String,
+        required: false
+    },
+    enddate:
+    {
+        type: String,
+        required: false
     }
+
 });
 
 module.exports = model('Simulacrum', SimulacrumSchema);

@@ -4,12 +4,12 @@ const TrainingDataSchema = new Schema({
 
     id_bombero:
     {
-        type: ObjectId,
+        type: String,
         required: false
     },
     id_training:
     {
-        type: ObjectId,
+        type: String,
         required: false
     },
     pulso:
@@ -35,8 +35,9 @@ const TrainingDataSchema = new Schema({
     },
     date:
     {
-        type: Date, default: Date.now
+        type: String
     }
+
 
 });
 

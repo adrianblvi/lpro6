@@ -105,7 +105,7 @@
     let caida = document.getElementById('caida');
     let isfall = document.getElementById('isfall');
 
-    socket.emit('inicio:user', 'inicio');
+    socket.emit('inicio:user', 'Intervention');
 
     btnFin.addEventListener('click', () => {
         socket.emit('fin:user', 'fin');
@@ -113,12 +113,9 @@
 
     socket.on('prueba', (datos) => {
         tempExt.innerHTML = datos.tempext;
-        console.log(datos.tempext);
         tempInt.innerHTML = datos.tempint;
-        console.log(datos.tempint);
         pulso.innerHTML = datos.pulso;
-        console.log(datos.caida);
-        console.log(datos.pulso);
+
         if (datos.caida == 1) {
             console.log('Caida!!!')
         }

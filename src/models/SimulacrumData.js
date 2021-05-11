@@ -4,12 +4,12 @@ const SimulacrumDataSchema = new Schema({
 
     id_bombero:
     {
-        type: ObjectId,
+        type: String,
         required: false
     },
     id_simulacrum:
     {
-        type: ObjectId,
+        type: String,
         required: false
     },
     pulso:
@@ -35,8 +35,9 @@ const SimulacrumDataSchema = new Schema({
     },
     date:
     {
-        type: Date, default: Date.now
+        type: String
     }
+
 
 });
 
