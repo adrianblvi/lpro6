@@ -63,8 +63,6 @@ function obtainDuration(horaIni, horaFin) {
     const seghorafin = horaFin.split(':')[2];
     const totalseg_horaini = parseInt(htos_horaini, 10) + parseInt(mintos_horaini, 10) + parseInt(seghoraini, 10);
     const totalseg_horafin = parseInt(htos_horafin, 10) + parseInt(mintos_horafin, 10) + parseInt(seghorafin, 10);
-    console.log(totalseg_horaini);
-    console.log(totalseg_horafin);
     const duracion = totalseg_horafin - totalseg_horaini;
     return secondsToString(duracion);
 }

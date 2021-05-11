@@ -87,7 +87,6 @@ io.on('connection', (socket) => {
                         date: datetime
                     });
                     const dataAdd = await newData.save();
-                    console.log(dataAdd);
                 } else if (simmode) {
                     const simulacrums = await Simulacrum.find();
                     const int_id = simulacrums[simulacrums.length - 1].id;
@@ -104,7 +103,6 @@ io.on('connection', (socket) => {
                         date: datetime
                     });
                     const dataAdd = await newData.save();
-                    console.log(dataAdd);
                 } else if (trmode) {
                     const trainings = await Training.find();
                     const int_id = trainings[trainings.length - 1].id;
@@ -121,7 +119,6 @@ io.on('connection', (socket) => {
                         date: datetime
                     });
                     const dataAdd = await newData.save();
-                    console.log(dataAdd);
                 }
             } else {
                 console.log('bd es false');
