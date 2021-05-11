@@ -1,0 +1,124 @@
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+    href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+<link rel="stylesheet" type="text/css"
+    href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+<link rel="stylesheet" type="text/css"
+    href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+<div class="container">
+    <div class="main-body">
+        <div class="grey-bg container-fluid">
+            <section id="minimal-statistics">
+                <div class="row p-4">
+                    <div class="col-md-8">
+                        <div class="col-12 mt-3 mb-1 text-center">
+                            <h4>SIMULACRO EN CURSO!</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 p-2">
+                        <a href="/sim/end" id="btnFin" class="btn btn-primary waves-effect waves-light"><i
+                                class="mdi mdi-plus ml-auto"></i> Finalizar Simulacro</a>
+                        <!-- <button id="btnFin">Finalizar Intervención</button>-->
+                    </div>
+                </div>
+                <div class="row p-4">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-user-astronaut primary font-large-2 float-left"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3 class="primary">{{user.name}}</h3>
+                                            <p class="primary">{{user.lastname}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-heartbeat warning font-large-2 float-left"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3 id="pulso" class="warning"></h3>
+                                            <span>Ritmo Cardíaco</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-thermometer success font-large-2 float-left"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3 id="tempInt" class="success"></h3>
+                                            <span>Temperatura Int </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-thermometer danger font-large-2 float-left"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3 id="tempExt" class="danger"></h3>
+                                            <span>Temperatura Ext </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script>
+    const socket = io();
+    let tempExt = document.getElementById('tempExt');
+    let tempInt = document.getElementById('tempInt');
+    let pulso = document.getElementById('pulso');
+    let btnFin = document.getElementById('btnFin');
+    let caida = document.getElementById('caida');
+    let isfall = document.getElementById('isfall');
+
+    socket.emit('inicio:user', 'Simulacrum');
+
+    btnFin.addEventListener('click', () => {
+        socket.emit('fin:user', 'fin');
+    });
+
+    socket.on('prueba', (datos) => {
+        tempExt.innerHTML = datos.tempext;
+        tempInt.innerHTML = datos.tempint;
+        pulso.innerHTML = datos.pulso;
+
+        if (datos.caida == 1) {
+            console.log('Caida!!!')
+        }
+    });
+
+</script>
