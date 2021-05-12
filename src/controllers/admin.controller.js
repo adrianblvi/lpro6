@@ -2,6 +2,9 @@ const adminCtrls = {}
 
 // Models
 const User = require('../models/User');
+const Intervention = require('../models/Intervention');
+const Simulacrum = require('../models/Simulacrum');
+const Training = require('../models/Training');
 
 adminCtrls.getUsers = async (req, res) => {
     const users = await User.find();
@@ -46,7 +49,10 @@ adminCtrls.getStats = async (req, res) => {
 
 adminCtrls.viewUser = async (req, res) => {
     const user = await User.findById(req.params.id);
-    res.render('admin/usercard', { user });
+    const numInt = await Intervention.find({ 'id_bombero': req.params.id }).countDocuments();
+    const numSim = await Simulacrum.find({ 'id_bombero': req.params.id }).countDocuments();
+    const numTrain = await Training.find({ 'id_bombero': req.params.id }).countDocuments();
+    res.render('admin/usercard', { user, numInt, numSim, numTrain });
 };
 
 

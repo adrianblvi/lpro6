@@ -21,13 +21,35 @@ interventionCtrls.renderIntStats = async (req, res) => {
     const duracion = obtainDuration(horaIni, horaFin);
     const datosInt = await intData.find({ 'id_intervention': Stats.id });
     const datelist = [];
+    const tempInt = [];
+    const tempExt = [];
+    const pulse = [];
+    const caidas = [];
+    let haycaida = false;
+    let totalTempint = 0;
+    let totalpulso = 0;
+    let totalcaidas = 0;
+    let totalTempExt = 0;
     for (let i = 0; i < datosInt.length; i++) {
         datelist.push(datosInt[i].date);
+        tempInt.push(datosInt[i].temp_int);
+        tempExt.push(datosInt[i].temp_ext);
+        pulse.push(datosInt[i].pulso);
+        caidas.push(datosInt[i].caida);
+        totalpulso += datosInt[i].pulso;
+        totalTempint += datosInt[i].temp_int;
+        totalTempExt += datosInt[i].temp_ext;
+        totalcaidas += datosInt[i].caida;
     }
-    const temp = ['35.5', '36.2', '35.8', '36.5', '36.9', '37.1', '37.2','36.5','36.4','36.1'];
-    const pulse = ['83.5', '86.2', '88.8', '87.5', '88.9', '89.1', '87.2','86.5','90.4','88.1'];
+    if (totalcaidas > 0) {
+        haycaida = true;
+    }
+    const avgTempInt = (totalTempint / datosInt.length).toFixed(2);
+    const avgTempExt = (totalTempExt / datosInt.length).toFixed(2);
+    const avgPulso = (totalpulso / datosInt.length).toFixed(2);
+
     const labels = datelist;
-    res.render('intervention/stats', { Stats, fecha, duracion, temp, labels, pulse });
+    res.render('intervention/stats', { Stats, fecha, duracion, labels, caidas, tempInt, tempExt, pulse, haycaida, avgTempInt, avgTempExt, avgPulso });
 }
 
 

@@ -1,6 +1,7 @@
 const trainingCtrls = {}
 
 const Training = require('../models/Training');
+const TrData = require('../models/TrainingData');
 
 trainingCtrls.renderTrainList = async (req, res) => {
     const trainings = await Training.find();
@@ -15,7 +16,38 @@ trainingCtrls.renderTrainStats = async (req, res) => {
     const horaIni = date.split(' ')[1];
     const horaFin = dateEnd.split(' ')[1];
     const duracion = obtainDuration(horaIni, horaFin);
-    res.render('training/stats', { Stats, fecha, duracion });
+
+    const datosInt = await TrData.find({ 'id_training': Stats.id });
+    const datelist = [];
+    const tempInt = [];
+    const tempExt = [];
+    const pulse = [];
+    const caidas = [];
+    let haycaida = false;
+    let totalTempint = 0;
+    let totalpulso = 0;
+    let totalcaidas = 0;
+    let totalTempExt = 0;
+    for (let i = 0; i < datosInt.length; i++) {
+        datelist.push(datosInt[i].date);
+        tempInt.push(datosInt[i].temp_int);
+        tempExt.push(datosInt[i].temp_ext);
+        pulse.push(datosInt[i].pulso);
+        caidas.push(datosInt[i].caida);
+        totalpulso += datosInt[i].pulso;
+        totalTempint += datosInt[i].temp_int;
+        totalTempExt += datosInt[i].temp_ext;
+        totalcaidas += datosInt[i].caida;
+    }
+    if (totalcaidas > 0) {
+        haycaida = true;
+    }
+    const avgTempInt = (totalTempint / datosInt.length).toFixed(2);
+    const avgTempExt = (totalTempExt / datosInt.length).toFixed(2);
+    const avgPulso = (totalpulso / datosInt.length).toFixed(2);
+    const labels = datelist;
+
+    res.render('training/stats', { Stats, fecha, duracion, labels, caidas, tempInt, tempExt, pulse, haycaida, avgTempInt, avgTempExt, avgPulso });
 }
 
 trainingCtrls.newTraining = async (req, res) => {

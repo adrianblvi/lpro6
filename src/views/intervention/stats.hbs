@@ -40,7 +40,7 @@
                                     <i class="fas fa-heartbeat warning font-large-2 float-left"></i>
                                 </div>
                                 <div class="media-body text-right">
-                                    <h3 class="warning">87.4 ppm</h3>
+                                    <h3 class="warning">{{avgPulso}}</h3>
                                     <span>Ritmo Cardíaco</span>
                                 </div>
                             </div>
@@ -57,8 +57,8 @@
                                     <i class="fas fa-thermometer success font-large-2 float-left"></i>
                                 </div>
                                 <div class="media-body text-right">
-                                    <h3 class="success">36.3</h3>
-                                    <span>Temperatura med</span>
+                                    <h3 class="success">{{avgTempInt}}º</h3>
+                                    <span>Temp. Interior</span>
                                 </div>
                             </div>
                         </div>
@@ -71,11 +71,11 @@
                         <div class="card-body">
                             <div class="media d-flex">
                                 <div class="align-self-center">
-                                    <i class="fas fa-ambulance danger font-large-2 float-left"></i>
+                                    <i class="fas fa-thermometer danger font-large-2 float-left"></i>
                                 </div>
                                 <div class="media-body text-right">
-                                    <h3 class="danger">1</h3>
-                                    <span>Caidas</span>
+                                    <h3 class="danger">{{avgTempExt}}º</h3>
+                                    <span>Temp. Exterior</span>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                 </script>
             </div>
             <div class="col-xl-6">
-                <p>Evolución Temperaturas</p>
+                <p>Evolución de la temperatura inteior</p>
                 <canvas id="tempChart" width="400" height="400"></canvas>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                 <script type="text/javascript">
@@ -147,14 +147,14 @@
                          })*/
                         myChart.update();
                     }
-                    const datatemp = [{{ temp }}];
+                    const datatemp_int = [{{ tempInt }}];
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: [],
                             datasets: [{
                                 label: 'Temp. Corporal',
-                                data: datatemp,
+                                data: datatemp_int,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)'
                                 ],
@@ -179,33 +179,34 @@
         </div>
         <div class="row p-4">
             <div class="col-xl-6">
-                <p>Frecuencia Cardíaca frente a las Temperaturas</p>
-                <canvas id="pulsoTemp" width="400" height="400"></canvas>
+                <p>Evolución de la temperatura exterior</p>
+                <canvas id="tempExt" width="400" height="400"></canvas>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                 <script type="text/javascript">
-                    var ctx = document.getElementById('pulsoTemp').getContext('2d');
+                    var ctx = document.getElementById('tempExt').getContext('2d');
+                    function updateChart() {
+                        const datos = `{{labels}}`.split(',');
+                        for (let i = 0; i < datos.length; i++) {
+                            myChart.data.labels.push(datos[i]);
+                        }
+                        /* myChart.data.datasets.forEach(datasets => {
+                             dataset.data.push(`{{data}}`);
+                         })*/
+                        myChart.update();
+                    }
+                    const datatemp_ext = [{{ tempExt }}];
                     var myChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
                             labels: [],
                             datasets: [{
-                                label: 'Ritmo cardiaco',
-                                data: [12, 19, 3, 5, 2, 3],
+                                label: 'Temp. Exterior',
+                                data: datatemp_ext,
                                 backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
+                                    'rgba(255, 205, 86, 0.2)'
                                 ],
                                 borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
+                                    'rgb(255, 205, 86)',
                                 ],
                                 borderWidth: 1
                             }]
@@ -218,13 +219,57 @@
                             }
                         }
                     });
+                    updateChart();
 
                 </script>
             </div>
             <div class="col-xl-6">
-                <!--Añadir if para comporbar si hay caidas-->
-                <p>Relación de caidas con pulso y temperatura</p>
+                {{#if haycaida}}
+                <p>Caidas a lo largo de la intervención</p>
+                <canvas id="gCaidas" width="400" height="400"></canvas>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+                <script type="text/javascript">
+                    var ctx = document.getElementById('gCaidas').getContext('2d');
+                    function updateChart() {
+                        const datos = `{{labels}}`.split(',');
+                        for (let i = 0; i < datos.length; i++) {
+                            myChart.data.labels.push(datos[i]);
+                        }
+                        /* myChart.data.datasets.forEach(datasets => {
+                             dataset.data.push(`{{data}}`);
+                         })*/
+                        myChart.update();
+                    }
+                    const caidas_data = [{{ caidas }}];
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: [],
+                            datasets: [{
+                                label: 'Caidas',
+                                data: caidas_data,
+                                backgroundColor: [
+                                    'rgba(153, 102, 255, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgb(153, 102, 255)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                    updateChart();
+
+                </script>
             </div>
+            {{/if}}
         </div>
     </section>
 </div>

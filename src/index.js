@@ -49,19 +49,19 @@ io.on('connection', (socket) => {
         const recv = datos.data;
         if (!(recv == undefined)) {
             const tempint = recv.substring(0, 2);
-            let tempint_parse = parseInt(tempint, 16);
+            let resint_parse = parseInt(tempint, 16);
             const tempext = recv.substring(2, 4);
-            let tempext_parse = parseInt(tempext, 16);
+            let resext_parse = parseInt(tempext, 16);
             const caida = recv.substring(4, 6);
 
             //Calculo de temperatura!
 
-            const config_thermistor_resistor = 99001
-            const resistencia_ti = config_thermistor_resistor * ((1023.0 / tempint_parse) - 1)
-            tempint_parse = Math.log(resistencia_ti)
+            //const config_thermistor_resistor = 99001
+            //const resistencia_ti = config_thermistor_resistor * ((1023.0 / tempint_parse) - 1)
+            //const resistencia_te = config_thermistor_resistor * ((1023.0 / tempext_parse) - 1)
+            let tempint_parse = Math.log(resint_parse * 100)
             tempint_parse = (1 / (0.001129148 + (0.000234125 * tempint_parse) + (0.0000000876741 * tempint_parse * tempint_parse * tempint_parse))) - 273.15
-            const resistencia_te = config_thermistor_resistor * ((1023.0 / tempext_parse) - 1)
-            tempext_parse = Math.log(resistencia_te)
+            let tempext_parse = Math.log(resext_parse * 100)
             tempext_parse = (1 / (0.001129148 + (0.000234125 * tempext_parse) + (0.0000000876741 * tempext_parse * tempext_parse * tempext_parse))) - 273.15
 
             //Fin calculo
