@@ -40,7 +40,7 @@
                                     <i class="fas fa-heartbeat warning font-large-2 float-left"></i>
                                 </div>
                                 <div class="media-body text-right">
-                                    <h3 class="warning">156</h3>
+                                    <h3 class="warning">87.4 ppm</h3>
                                     <span>Ritmo Cardíaco</span>
                                 </div>
                             </div>
@@ -57,8 +57,8 @@
                                     <i class="fas fa-thermometer success font-large-2 float-left"></i>
                                 </div>
                                 <div class="media-body text-right">
-                                    <h3 class="success">64.8º/64.8º</h3>
-                                    <span>Temperaturas (I/E)</span>
+                                    <h3 class="success">36.3</h3>
+                                    <span>Temperatura med</span>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                     <i class="fas fa-ambulance danger font-large-2 float-left"></i>
                                 </div>
                                 <div class="media-body text-right">
-                                    <h3 class="danger">423</h3>
+                                    <h3 class="danger">1</h3>
                                     <span>Caidas</span>
                                 </div>
                             </div>
@@ -92,28 +92,29 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                 <script type="text/javascript">
                     var ctx = document.getElementById('myChart').getContext('2d');
+                    function updateChart() {
+                        const datos = `{{labels}}`.split(',');
+                        for (let i = 0; i < datos.length; i++) {
+                            myChart.data.labels.push(datos[i]);
+                        }
+                        /* myChart.data.datasets.forEach(datasets => {
+                             dataset.data.push(`{{data}}`);
+                         })*/
+                        myChart.update();
+                    }
+                    const puls = [{{ pulse }}];
                     var myChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
                             labels: [],
                             datasets: [{
-                                label: 'Ritmo cardiaco',
-                                data: [12, 19, 3, 5, 2, 3],
+                                label: 'Pulso Cardíaco',
+                                data: puls,
                                 backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
+                                    'rgba(54, 162, 235, 0.2)'
                                 ],
                                 borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
+                                    'rgba(54, 162, 235, 1)'
                                 ],
                                 borderWidth: 1
                             }]
@@ -126,6 +127,7 @@
                             }
                         }
                     });
+                    updateChart();
 
                 </script>
             </div>
@@ -135,28 +137,29 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
                 <script type="text/javascript">
                     var ctx = document.getElementById('tempChart').getContext('2d');
+                    function updateChart() {
+                        const datos = `{{labels}}`.split(',');
+                        for (let i = 0; i < datos.length; i++) {
+                            myChart.data.labels.push(datos[i]);
+                        }
+                        /* myChart.data.datasets.forEach(datasets => {
+                             dataset.data.push(`{{data}}`);
+                         })*/
+                        myChart.update();
+                    }
+                    const datatemp = [{{ temp }}];
                     var myChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
                             labels: [],
                             datasets: [{
                                 label: 'Temp. Corporal',
-                                data: [12, 19, 3, 5, 2, 3],
+                                data: datatemp,
                                 backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
+                                    'rgba(255, 99, 132, 0.2)'
                                 ],
                                 borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
+                                    'rgba(255, 99, 132, 1)'
                                 ],
                                 borderWidth: 1
                             }]
@@ -169,6 +172,7 @@
                             }
                         }
                     });
+                    updateChart();
 
                 </script>
             </div>

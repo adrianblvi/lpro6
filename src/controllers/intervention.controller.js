@@ -1,6 +1,7 @@
 const interventionCtrls = {}
 const Chart = require('chart.js');
 const Intervention = require('../models/Intervention');
+const intData = require('../models/InterventionData');
 
 
 interventionCtrls.renderIntList = async (req, res) => {
@@ -18,7 +19,15 @@ interventionCtrls.renderIntStats = async (req, res) => {
     const horaIni = date.split(' ')[1];
     const horaFin = dateEnd.split(' ')[1];
     const duracion = obtainDuration(horaIni, horaFin);
-    res.render('intervention/stats', { Stats, fecha, duracion });
+    const datosInt = await intData.find({ 'id_intervention': Stats.id });
+    const datelist = [];
+    for (let i = 0; i < datosInt.length; i++) {
+        datelist.push(datosInt[i].date);
+    }
+    const temp = ['35.5', '36.2', '35.8', '36.5', '36.9', '37.1', '37.2','36.5','36.4','36.1'];
+    const pulse = ['83.5', '86.2', '88.8', '87.5', '88.9', '89.1', '87.2','86.5','90.4','88.1'];
+    const labels = datelist;
+    res.render('intervention/stats', { Stats, fecha, duracion, temp, labels, pulse });
 }
 
 
